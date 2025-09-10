@@ -285,7 +285,8 @@ We acknowledge the influence of the following works:
 
 ## Documentation 
 
-**[➡️ documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
+**[➡️⚡️ Live documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
+ 📖 **[Full documentation](./docs)**
 
 ## Star History
  
