@@ -283,11 +283,9 @@ We acknowledge the influence of the following works:
 
 - Neo4j – foundational graph database technology enabling scalable Graph RAG implementations.
 
-## Deconstructing VeritasGraph
+## Documentation 
 
-[![An In-Depth Look at the Four-Stage RAG Pipeline](./preview.png)](https://bibinprathap.github.io/VeritasGraph/index.html)
-
-**[➡️ Click here to view the Four-Stage](https://bibinprathap.github.io/VeritasGraph/index.html)**
+**[➡️ documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
 
 ## Star History
  
