@@ -4,12 +4,24 @@
 
 [![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+**[➡️⚡️ Live documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
+ 📖 **[Full documentation](./docs)**
 VeritasGraph is a production-ready, end-to-end framework for building advanced question-answering and summarization systems that operate entirely within your private infrastructure.  
 
 It is architected to overcome the fundamental limitations of traditional vector-search-based Retrieval-Augmented Generation (RAG) by leveraging a knowledge graph to perform complex, multi-hop reasoning.  
 
 Baseline RAG systems excel at finding direct answers but falter when faced with questions that require connecting disparate information or understanding a topic holistically. **VeritasGraph addresses this challenge directly, providing not just answers, but transparent, auditable reasoning paths with full source attribution for every generated claim, establishing a new standard for trust and reliability in enterprise AI.**
+<p align="center"> 
+<img alt="stars" title="stars" src="https://img.shields.io/github/stars/bibinprathap/VeritasGraph" />
+<img alt="issues" title="issues" src="https://img.shields.io/github/issues/bibinprathap/VeritasGraph" />
+<img alt="forks" title="forks" src="https://img.shields.io/github/forks/bibinprathap/VeritasGraph" />
+<img alt="stars" title="stars" src="https://img.shields.io/github/stars/bibinprathap/VeritasGraph" />
+<img alt="license" title="license" src="https://img.shields.io/github/license/bibinprathap/VeritasGraph" />
+<a href="https://linkedin.com/in/bibin-prathap-4a34a489/">
+<img src="https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin&labelColor=blue">
+</a>
 
+</p>
 ---
 ## Why VeritasGraph?
 
@@ -283,11 +295,7 @@ We acknowledge the influence of the following works:
 
 - Neo4j – foundational graph database technology enabling scalable Graph RAG implementations.
 
-## Documentation 
-
-**[➡️⚡️ Live documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
- 📖 **[Full documentation](./docs)**
-
+ 
 ## Star History
  
 [![Star History Chart](https://api.star-history.com/svg?repos=bibinprathap/VeritasGraph&type=Date)](https://www.star-history.com/#bibinprathap/VeritasGraph&Date)
