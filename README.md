@@ -14,8 +14,7 @@ Baseline RAG systems excel at finding direct answers but falter when faced with 
 <p align="center"> 
 <img alt="stars" title="stars" src="https://img.shields.io/github/stars/bibinprathap/VeritasGraph" />
 <img alt="issues" title="issues" src="https://img.shields.io/github/issues/bibinprathap/VeritasGraph" />
-<img alt="forks" title="forks" src="https://img.shields.io/github/forks/bibinprathap/VeritasGraph" />
-<img alt="stars" title="stars" src="https://img.shields.io/github/stars/bibinprathap/VeritasGraph" />
+<img alt="forks" title="forks" src="https://img.shields.io/github/forks/bibinprathap/VeritasGraph" /> 
 <img alt="license" title="license" src="https://img.shields.io/github/license/bibinprathap/VeritasGraph" />
 <a href="https://linkedin.com/in/bibin-prathap-4a34a489/">
 <img src="https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin&labelColor=blue">
