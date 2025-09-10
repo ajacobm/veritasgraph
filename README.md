@@ -1,8 +1,6 @@
 # VeritasGraph  
 **Enterprise-Grade Graph RAG for Secure, On-Premise AI with Verifiable Attribution**
 
-**[➡️⚡️ Live documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
- 📖 **[Full documentation](./docs)**
 VeritasGraph is a production-ready, end-to-end framework for building advanced question-answering and summarization systems that operate entirely within your private infrastructure.  
 
 It is architected to overcome the fundamental limitations of traditional vector-search-based Retrieval-Augmented Generation (RAG) by leveraging a knowledge graph to perform complex, multi-hop reasoning.  
@@ -18,6 +16,10 @@ Baseline RAG systems excel at finding direct answers but falter when faced with 
 </a>
 
 </p>
+
+**[➡️⚡️ Live documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
+ 📖 **[Full documentation](./docs)**
+ 
 ---
 ## Why VeritasGraph?
 
