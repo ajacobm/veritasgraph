@@ -1,9 +1,6 @@
 # VeritasGraph  
 **Enterprise-Grade Graph RAG for Secure, On-Premise AI with Verifiable Attribution**
 
-
-[![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 **[➡️⚡️ Live documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
  📖 **[Full documentation](./docs)**
 VeritasGraph is a production-ready, end-to-end framework for building advanced question-answering and summarization systems that operate entirely within your private infrastructure.  
