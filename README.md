@@ -18,7 +18,9 @@ Baseline RAG systems excel at finding direct answers but falter when faced with 
 </p>
 
 **[➡️⚡️ Live documentation](https://bibinprathap.github.io/VeritasGraph/index.html)**
- 📖 **[Full documentation](./docs)**
+
+**[📖 Article](https://medium.com/@bibinprathap/beyond-vector-search-building-trustworthy-enterprise-ai-with-the-veritasgraph-rag-pipeline-53fc8e9e8ff9)**
+
  
 ---
 ## Why VeritasGraph?
