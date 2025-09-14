@@ -1,5 +1,7 @@
 # VeritasGraph  
 **Enterprise-Grade Graph RAG for Secure, On-Premise AI with Verifiable Attribution**
+ 
+<img src="https://github.com/bibinprathap/VeritasGraph/blob/master/VeritasGraph.jpeg" alt="Project Logo" style="max-width:140px; height:150px;">
 
 VeritasGraph is a production-ready, end-to-end framework for building advanced question-answering and summarization systems that operate entirely within your private infrastructure.  
 
