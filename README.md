@@ -43,9 +43,10 @@ Build a **sovereign knowledge asset**, free from vendor lock-in, with full owner
 
 ### Video Walkthrough  
 A brief video demonstrating the core functionality of VeritasGraph, from data ingestion to multi-hop querying with full source attribution.  
-
+## Windows
 [![Video Walkthrough](https://github.com/bibinprathap/VeritasGraph/blob/master/assets/graphrag.JPG)](https://drive.google.com/file/d/1lEmAOUCLV0h98kY-ars96SNf5O6lVmiY/view?usp=sharing)  
-
+## Linux
+[![Video Walkthrough](https://github.com/bibinprathap/VeritasGraph/blob/master/assets/VertasGraph-Linux.png)](https://drive.google.com/file/d/1OmeCj9-HKTCDoznPDE8u7Bbb3qxYBs9n/view?usp=sharing)  
  
 ---
 
@@ -83,7 +84,7 @@ The following diagram illustrates the end-to-end pipeline of the VeritasGraph sy
 ![image](assets/UI.png)
  
 ## Environment
-I'm using Ollama ( llama3.1) on Windows and  Ollama (nomic-text-embed) for text embeddings
+I'm using Ollama ( llama3.1) on Windows / Linux and  Ollama (nomic-text-embed) for text embeddings
  
 Please don't use WSL if you use LM studio for embeddings because it will have issues connecting to the services on Windows (LM studio)
  
