@@ -23,6 +23,8 @@ Baseline RAG systems excel at finding direct answers but falter when faced with 
 
 **[📖 Article](https://medium.com/@bibinprathap/beyond-vector-search-building-trustworthy-enterprise-ai-with-the-veritasgraph-rag-pipeline-53fc8e9e8ff9)**
 
+**[📄 Research Paper](VeritasGraph%20-%20A%20Sovereign%20GraphRAG%20Framework%20for%20Enterprise-Grade%20AI%20with%20Verifiable%20Attribution.pdf)**
+
  
 ---
 ## Why VeritasGraph?
@@ -301,6 +303,32 @@ This stands in contrast to reliance on opaque, proprietary, cloud-based APIs, em
 - Agentic Framework – Multi-step reasoning tasks, breaking down complex queries into sub-queries.
 
 - Visualization UI – A web interface for graph exploration and attribution path inspection.
+
+## 🏆 Awards & Recognition
+
+VeritasGraph has been recognized for its contribution to the field of AI and Knowledge Graphs.
+
+### ICASF 2025
+Presented at the **International Conference on Applied Science and Future Technology (ICASF 2025)**.
+
+![ICASF 2025 Presentation](presentation.jpeg)
+
+**[📄 View Appreciation Certificate](ICASF%202025%20-%20Appreciation%20Certificate.pdf)**
+
+## 📚 Citation
+
+If you use VeritasGraph in your research, please cite our paper:
+
+**[VeritasGraph: A Sovereign GraphRAG Framework for Enterprise-Grade AI with Verifiable Attribution](VeritasGraph%20-%20A%20Sovereign%20GraphRAG%20Framework%20for%20Enterprise-Grade%20AI%20with%20Verifiable%20Attribution.pdf)**
+
+```bibtex
+@article{VeritasGraph2025,
+  title={VeritasGraph: A Sovereign GraphRAG Framework for Enterprise-Grade AI with Verifiable Attribution},
+  author={Bibin Prathap},
+  journal={International Conference on Applied Science and Future Technology (ICASF)},
+  year={2025}
+}
+```
 
 ## 7. Acknowledgments & Citations
 
