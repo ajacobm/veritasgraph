@@ -2,3 +2,5 @@ python-dotenv
 gradio
 pandas
 tiktoken
+pyvis
+networkx

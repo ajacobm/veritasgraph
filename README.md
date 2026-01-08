@@ -25,6 +25,12 @@ Baseline RAG systems excel at finding direct answers but falter when faced with 
 
 **[📄 Research Paper](VeritasGraph%20-%20A%20Sovereign%20GraphRAG%20Framework%20for%20Enterprise-Grade%20AI%20with%20Verifiable%20Attribution.pdf)**
 
+<!-- DEMO_URL_START -->
+
+**[🎮 Try Live Demo](https://your-demo-url.trycloudflare.com)** - *Auto-updated on server restart*
+
+<!-- DEMO_URL_END -->
+
  
 ---
 ## Why VeritasGraph?
@@ -37,6 +43,9 @@ Every generated claim is **traced back** to its source document, guaranteeing tr
 
 ### ✅ Advanced Graph Reasoning
 Answer **complex, multi-hop questions** that go beyond the capabilities of traditional vector search engines.
+
+### ✅ Interactive Graph Visualization
+Explore your knowledge graph with an **interactive 2D graph explorer** powered by PyVis, showing entities, relationships, and reasoning paths in real-time.
 
 ### ✅ Open-Source & Sovereign
 Build a **sovereign knowledge asset**, free from vendor lock-in, with full ownership and customization.
@@ -97,6 +106,191 @@ Clone the repo and run a full VeritasGraph stack (Ollama + Neo4j + Gradio app) w
     - Ollama API: http://localhost:11434/
 
 See `docker/five-minute-magic-onboarding/README.md` for deeper details.
+
+---
+
+## 🌐 Free Cloud Deployment (Share with Developers)
+
+Share VeritasGraph with your team using these **free** deployment options:
+
+### Option 1: Gradio Share Link (Easiest - 72 hours)
+
+Run with the `--share` flag to get a public URL instantly:
+
+```bash
+cd graphrag-ollama-config
+python app.py --share
+```
+
+This creates a temporary public URL like `https://xxxxx.gradio.live` that works for **72 hours**. Perfect for quick demos!
+
+### Option 2: Ngrok (Persistent Local Tunnel)
+
+Keep Ollama running locally while exposing the UI to the internet:
+
+1. **Install ngrok:** https://ngrok.com/download (free account required)
+
+2. **Start your app locally:**
+   ```bash
+   cd graphrag-ollama-config
+   python app.py --host 0.0.0.0 --port 7861
+   ```
+
+3. **In another terminal, create the tunnel:**
+   ```bash
+   ngrok http 7861
+   ```
+
+4. **Share the ngrok URL** (e.g., `https://abc123.ngrok.io`) with developers.
+
+### Option 3: Cloudflare Tunnel (Free, No Account Required)
+
+```bash
+# Install cloudflared
+# Windows: winget install cloudflare.cloudflared
+# Mac: brew install cloudflared
+# Linux: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/
+
+# Start the tunnel
+cloudflared tunnel --url http://localhost:7861
+```
+
+### Option 4: Hugging Face Spaces (Permanent Free Hosting)
+
+For a permanent demo (without local Ollama), deploy to Hugging Face Spaces:
+
+1. Create a new Space at https://huggingface.co/spaces
+2. Choose "Gradio" as the SDK
+3. Upload your `graphrag-ollama-config` folder
+4. Set environment variables in Space settings (use OpenAI/Groq API instead of Ollama)
+
+### Comparison Table
+
+| Method | Duration | Local Ollama | Setup Time | Best For |
+|--------|----------|--------------|------------|----------|
+| `--share` | 72 hours | ✅ Yes | 1 min | Quick demos |
+| Ngrok | Unlimited* | ✅ Yes | 5 min | Team evaluation |
+| Cloudflare | Unlimited* | ✅ Yes | 5 min | Team evaluation |
+| HF Spaces | Permanent | ❌ No (use cloud LLM) | 15 min | Public showcase |
+
+*Free tier has some limitations
+
+---
+
+## OpenAI-Compatible API Support
+
+VeritasGraph supports **any OpenAI-compatible API**, making it easy to use with various LLM providers:
+
+| Provider | Type | Notes |
+|----------|------|-------|
+| **OpenAI** | Cloud | Native API support |
+| **Azure OpenAI** | Cloud | Full Azure integration |
+| **Groq** | Cloud | Ultra-fast inference |
+| **Together AI** | Cloud | Open-source models |
+| **OpenRouter** | Cloud | Multi-provider routing |
+| **Anyscale** | Cloud | Scalable endpoints |
+| **LM Studio** | Local | Easy local deployment |
+| **LocalAI** | Local | Docker-friendly |
+| **vLLM** | Local/Server | High-performance serving |
+| **Ollama** | Local | Default setup |
+
+### Quick Setup
+
+1. **Copy the configuration files:**
+   ```bash
+   cd graphrag-ollama-config
+   cp settings_openai.yaml settings.yaml
+   cp .env.openai.example .env
+   ```
+
+2. **Edit `.env` with your provider settings:**
+   ```env
+   # Example: OpenAI
+   GRAPHRAG_API_KEY=sk-your-openai-api-key
+   GRAPHRAG_LLM_MODEL=gpt-4-turbo-preview
+   GRAPHRAG_LLM_API_BASE=https://api.openai.com/v1
+   GRAPHRAG_EMBEDDING_MODEL=text-embedding-3-small
+   GRAPHRAG_EMBEDDING_API_BASE=https://api.openai.com/v1
+   ```
+
+3. **Run GraphRAG:**
+   ```bash
+   python -m graphrag.index --root . --config settings_openai.yaml
+   python app.py
+   ```
+
+### Hybrid Configurations
+
+Mix different providers for LLM and embeddings (e.g., Groq for fast LLM + local Ollama for embeddings):
+
+```env
+GRAPHRAG_API_KEY=gsk_your-groq-key
+GRAPHRAG_LLM_MODEL=llama-3.1-70b-versatile
+GRAPHRAG_LLM_API_BASE=https://api.groq.com/openai/v1
+GRAPHRAG_EMBEDDING_API_KEY=ollama
+GRAPHRAG_EMBEDDING_MODEL=nomic-embed-text
+GRAPHRAG_EMBEDDING_API_BASE=http://localhost:11434/v1
+```
+
+📖 **Full documentation:** See [OPENAI_COMPATIBLE_API.md](graphrag-ollama-config/OPENAI_COMPATIBLE_API.md) for detailed provider configurations, environment variables reference, and troubleshooting.
+
+---
+
+## Switching Between Ollama and OpenAI-Compatible APIs
+
+You can easily switch between different LLM providers by editing your `.env` file. Here are the most common configurations:
+
+### Option 1: Full Ollama (100% Local/Private)
+```env
+# LLM - Ollama
+GRAPHRAG_API_KEY=ollama
+GRAPHRAG_LLM_MODEL=llama3.1-12k
+GRAPHRAG_LLM_API_BASE=http://localhost:11434/v1
+
+# Embeddings - Ollama
+GRAPHRAG_EMBEDDING_MODEL=nomic-embed-text
+GRAPHRAG_EMBEDDING_API_BASE=http://localhost:11434/v1
+GRAPHRAG_EMBEDDING_API_KEY=ollama
+```
+
+### Option 2: Full OpenAI (Cloud)
+```env
+# LLM - OpenAI
+GRAPHRAG_API_KEY=sk-proj-your-key
+GRAPHRAG_LLM_MODEL=gpt-4-turbo-preview
+GRAPHRAG_LLM_API_BASE=https://api.openai.com/v1
+
+# Embeddings - OpenAI
+GRAPHRAG_EMBEDDING_MODEL=text-embedding-3-small
+GRAPHRAG_EMBEDDING_API_BASE=https://api.openai.com/v1
+GRAPHRAG_EMBEDDING_API_KEY=sk-proj-your-key
+```
+
+### Option 3: Hybrid (OpenAI LLM + Ollama Embeddings)
+Best of both worlds - powerful cloud LLM with local embeddings for privacy:
+```env
+# LLM - OpenAI
+GRAPHRAG_API_KEY=sk-proj-your-key
+GRAPHRAG_LLM_MODEL=gpt-4-turbo-preview
+GRAPHRAG_LLM_API_BASE=https://api.openai.com/v1
+
+# Embeddings - Ollama (local)
+GRAPHRAG_EMBEDDING_MODEL=nomic-embed-text
+GRAPHRAG_EMBEDDING_API_BASE=http://localhost:11434/v1
+GRAPHRAG_EMBEDDING_API_KEY=ollama
+```
+
+### Quick Reference
+
+| Provider | API Base | API Key | Example Model |
+|----------|----------|---------|---------------|
+| **Ollama** | `http://localhost:11434/v1` | `ollama` | `llama3.1-12k` |
+| **OpenAI** | `https://api.openai.com/v1` | `sk-proj-...` | `gpt-4-turbo-preview` |
+| **Groq** | `https://api.groq.com/openai/v1` | `gsk_...` | `llama-3.1-70b-versatile` |
+| **Together AI** | `https://api.together.xyz/v1` | your-key | `meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo` |
+| **LM Studio** | `http://localhost:1234/v1` | `lm-studio` | (model loaded in LM Studio) |
+
+> ⚠️ **Important:** Embeddings must match your index! If you indexed with `nomic-embed-text` (768 dimensions), you must query with the same model. Switching embedding models requires **re-indexing** your documents.
 
 ---
 # Guide to build graphrag with local LLM
@@ -204,6 +398,39 @@ gradio app.py
 ```
  
 To use the app, visit http://127.0.0.1:7860/
+
+---
+
+## 🔗 Interactive Graph Visualization
+
+VeritasGraph includes an **interactive 2D knowledge graph explorer** that visualizes entities and relationships in real-time!
+
+### Graph Explorer Tab
+![Graph Explorer](assets/graph-explorer.png)
+*Interactive knowledge graph showing entities, communities, and relationships*
+
+### Chat with Graph Context
+![Chat Interface](assets/chat-with-graph.png)
+*Query responses with full source attribution and graph visualization*
+
+### Features
+| Feature | Description |
+|---------|-------------|
+| **Query-aware subgraph** | Shows only entities related to your query |
+| **Community coloring** | Nodes grouped by community membership |
+| **Red highlight** | Query-related entities shown in red |
+| **Node sizing** | Bigger nodes = more connections |
+| **Interactive** | Drag, zoom, hover for entity details |
+| **Full graph explorer** | View entire knowledge graph |
+
+### How It Works
+1. After each query, the system extracts the relevant subgraph (nodes/edges) used for reasoning
+2. PyVis generates an interactive HTML visualization
+3. Switch to the **🔗 Graph Explorer** tab to see the visualization
+4. Click **"Explore Full Graph"** to view the entire knowledge graph
+
+### Toggle Visualization
+Use the checkbox **"🔗 Show Graph Visualization"** in the left panel to enable/disable automatic graph updates after each query.
  
 ## 📑 Table of Contents  
 

@@ -1,0 +1,22 @@
+[Unit]
+Description=VeritasGraph with GitHub Auto-Sync
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/VeritasGraph
+Environment="PATH=/home/ubuntu/VeritasGraph/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="GITHUB_TOKEN=your-github-token-here"
+ExecStart=/home/ubuntu/VeritasGraph/scripts/start-with-github-sync.sh
+Restart=always
+RestartSec=30
+
+# Logging
+StandardOutput=append:/var/log/veritasgraph.log
+StandardError=append:/var/log/veritasgraph.log
+
+[Install]
+WantedBy=multi-user.target

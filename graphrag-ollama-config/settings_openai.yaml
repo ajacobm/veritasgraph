@@ -1,0 +1,113 @@
+# GraphRAG Settings for OpenAI Compatible API
+# This configuration works with OpenAI API, Azure OpenAI, and any OpenAI-compatible API
+# (e.g., LM Studio, LocalAI, Groq, Together AI, Anyscale, etc.)
+
+encoding_model: cl100k_base
+skip_workflows: []
+
+llm:
+  api_key: ${GRAPHRAG_API_KEY}
+  type: openai_chat
+  model: ${GRAPHRAG_LLM_MODEL}
+  model_supports_json: true
+  max_tokens: 4000
+  api_base: ${GRAPHRAG_LLM_API_BASE}
+  # api_version: 2024-02-15-preview  # Uncomment for Azure OpenAI
+  # deployment_name: <azure_model_deployment_name>  # Required for Azure OpenAI
+  # organization: <organization_id>  # Optional: OpenAI organization ID
+  max_retries: 5
+  concurrent_requests: 1
+  temperature: 0
+  # tokens_per_minute: 150_000  # Uncomment to set rate limiting
+  # requests_per_minute: 10_000  # Uncomment to set rate limiting
+  # request_timeout: 180.0  # Uncomment to set custom timeout
+
+parallelization:
+  stagger: 0.3
+  # num_threads: 50
+
+async_mode: threaded
+
+embeddings:
+  async_mode: threaded
+  llm:
+    api_key: ${GRAPHRAG_API_KEY}
+    type: openai_embedding
+    model: ${GRAPHRAG_EMBEDDING_MODEL}
+    api_base: ${GRAPHRAG_EMBEDDING_API_BASE}
+    # api_version: 2024-02-15-preview  # Uncomment for Azure OpenAI
+    # deployment_name: <azure_model_deployment_name>  # Required for Azure OpenAI
+    max_retries: 5
+    concurrent_requests: 1
+    batch_size: 16
+    batch_max_tokens: 8191
+
+chunks:
+  size: 300
+  overlap: 100
+  group_by_columns: [id]
+
+input:
+  type: file
+  file_type: text
+  base_dir: "input"
+  file_encoding: utf-8
+  file_pattern: ".*\\.txt$$"
+
+cache:
+  type: file
+  base_dir: "cache"
+
+storage:
+  type: file
+  base_dir: "output/artifacts"
+
+reporting:
+  type: file
+  base_dir: "output/reports"
+
+entity_extraction:
+  prompt: "prompts/entity_extraction.txt"
+  entity_types: [organization, person, geo, event, concept]
+  max_gleanings: 0
+
+summarize_descriptions:
+  prompt: "prompts/summarize_descriptions.txt"
+  max_length: 500
+
+claim_extraction:
+  prompt: "prompts/claim_extraction.txt"
+  description: "Any claims or facts that could be relevant to information discovery."
+  max_gleanings: 0
+
+community_reports:
+  prompt: "prompts/community_report.txt"
+
+cluster_graph:
+  max_cluster_size: 10
+
+embed_graph:
+  enabled: false
+
+umap:
+  enabled: false
+
+snapshots:
+  graphml: false
+  raw_entities: false
+  top_level_nodes: false
+
+local_search:
+  text_unit_prop: 0.5
+  community_prop: 0.1
+  conversation_history_max_turns: 5
+  top_k_mapped_entities: 10
+  top_k_relationships: 10
+  max_tokens: 12000
+
+global_search:
+  max_tokens: 12000
+  data_max_tokens: 12000
+  map_max_tokens: 1000
+  reduce_max_tokens: 2000
+  concurrency: 32

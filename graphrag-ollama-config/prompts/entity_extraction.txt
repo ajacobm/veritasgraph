@@ -1,121 +1,186 @@
 
 -Goal-
-Given a text document that is potentially relevant to this activity and a list of entity types, identify all entities of those types from the text and all relationships among the identified entities.
- 
+Given a text document that is potentially relevant to this activity, first identify all entities needed from the text in order to capture the information and ideas in the text.
+Next, report all relationships among the identified entities.
+
 -Steps-
 1. Identify all entities. For each identified entity, extract the following information:
 - entity_name: Name of the entity, capitalized
-- entity_type: One of the following types: [{entity_types}]
+- entity_type: Suggest several labels or categories for the entity. The categories should not be specific, but should be as general as possible.
 - entity_description: Comprehensive description of the entity's attributes and activities
 Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
- 
+
 2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
 For each pair of related entities, extract the following information:
 - source_entity: name of the source entity, as identified in step 1
 - target_entity: name of the target entity, as identified in step 1
 - relationship_description: explanation as to why you think the source entity and the target entity are related to each other
 - relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity
- Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
- 
+Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+
 3. Return output in English as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
- 
-4. When finished, output {completion_delimiter}
- 
-######################
+
+4. If you have to translate into English, just translate the descriptions, nothing else!
+
+5. When finished, output {completion_delimiter}.
+
 -Examples-
 ######################
+
 Example 1:
-Entity_types: ORGANIZATION,PERSON
-Text:
-The Verdantis's Central Institution is scheduled to meet on Monday and Thursday, with the institution planning to release its latest policy decision on Thursday at 1:30 p.m. PDT, followed by a press conference where Central Institution Chair Martin Smith will take questions. Investors expect the Market Strategy Committee to hold its benchmark interest rate steady in a range of 3.5%-3.75%.
-######################
-Output:
-("entity"{tuple_delimiter}CENTRAL INSTITUTION{tuple_delimiter}ORGANIZATION{tuple_delimiter}The Central Institution is the Federal Reserve of Verdantis, which is setting interest rates on Monday and Thursday)
-{record_delimiter}
-("entity"{tuple_delimiter}MARTIN SMITH{tuple_delimiter}PERSON{tuple_delimiter}Martin Smith is the chair of the Central Institution)
-{record_delimiter}
-("entity"{tuple_delimiter}MARKET STRATEGY COMMITTEE{tuple_delimiter}ORGANIZATION{tuple_delimiter}The Central Institution committee makes key decisions about interest rates and the growth of Verdantis's money supply)
-{record_delimiter}
-("relationship"{tuple_delimiter}MARTIN SMITH{tuple_delimiter}CENTRAL INSTITUTION{tuple_delimiter}Martin Smith is the Chair of the Central Institution and will answer questions at a press conference{tuple_delimiter}9)
-{completion_delimiter}
 
-######################
+text:
+
+- Data Source: International Affairs Database
+- Version: 1.2.3
+- Notes: Dashboard data for international affairs tracking and analysis
+
+------------------------
+output:
+Based on the provided text, I will follow the steps to identify entities and relationships.
+
+**Step 1: Identify all entities**
+
+From the text:
+
+* "International Affairs Database"
+	+ entity_name: INTERNATIONAL AFFAIRS DATABASE
+	+ entity_type: SOFTWARE/DATABASE
+	+ entity_description: A database used for tracking and analysis of international affairs
+* "Version 1.2.3"
+	+ entity_name: VERSION 1.2.3
+	+ entity_type: SOFTWARE/VERSION
+	+ entity_description: The current version of the International Affairs Database software
+* "Dashboard data"
+	+ entity_name: DASHBOARD DATA
+	+ entity_type: INFORMATION/DATA
+	+ entity_description: Data used for tracking and analysis in the dashboard of the International Affairs Database
+
+**Step 2: Identify all pairs of (source_entity, target_entity) that are clearly related to each other**
+
+From the text:
+
+* "International Affairs Database" is related to "Version 1.2.3"
+	+ source_entity: INTERNATIONAL AFFAIRS DATABASE
+	+ target_entity: VERSION 1.2.3
+	+ relationship_description: The International Affairs Database has a current version of 1.2.3
+	+ relationship_strength: 9 (highly related)
+* "International Affairs Database" is related to "Dashboard data"
+	+ source_entity: INTERNATIONAL AFFAIRS DATABASE
+	+ target_entity: DASHBOARD DATA
+	+ relationship_description: The International Affairs Database uses dashboard data for tracking and analysis
+	+ relationship_strength: 8 (strongly related)
+
+**Step 3: Return output in English as a single list of all the entities and relationships**
+
+Here is the output:
+
+("entity"{tuple_delimiter}INTERNATIONAL AFFAIRS DATABASE{tuple_delimiter}SOFTWARE/DATABASE{tuple_delimiter}A database used for tracking and analysis of international affairs)
+{record_delimiter}
+("entity"{tuple_delimiter}VERSION 1.2.3{tuple_delimiter}SOFTWARE/VERSION{tuple_delimiter}The current version of the International Affairs Database software)
+{record_delimiter}
+("entity"{tuple_delimiter}DASHBOARD DATA{tuple_delimiter}INFORMATION/DATA{tuple_delimiter}Data used for tracking and analysis in the dashboard of the International Affairs Database)
+{record_delimiter}
+("relationship"{tuple_delimiter}INTERNATIONAL AFFAIRS DATABASE{tuple_delimiter}VERSION 1.2.3{tuple_delimiter}The International Affairs Database has a current version of 1.2.3{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}INTERNATIONAL AFFAIRS DATABASE{tuple_delimiter}DASHBOARD DATA{tuple_delimiter}The International Affairs Database uses dashboard data for tracking and analysis{tuple_delimiter}8)
+
+**Step 4: Output {completion_delimiter}**
+
+{completion_delimiter}
+#############################
+
+
 Example 2:
-Entity_types: ORGANIZATION
-Text:
-TechGlobal's (TG) stock skyrocketed in its opening day on the Global Exchange Thursday. But IPO experts warn that the semiconductor corporation's debut on the public markets isn't indicative of how other newly listed companies may perform.
 
-TechGlobal, a formerly public company, was taken private by Vision Holdings in 2014. The well-established chip designer says it powers 85% of premium smartphones.
-######################
-Output:
-("entity"{tuple_delimiter}TECHGLOBAL{tuple_delimiter}ORGANIZATION{tuple_delimiter}TechGlobal is a stock now listed on the Global Exchange which powers 85% of premium smartphones)
+text:
+املا يف ةنايصلاو ةجرد نوكتو 0.15% نع ديزتلا نا بجي  هاجتا ىلع يدومع هاجتا يف امئاد لويملا بعلملا ةاعارم بجي هيلعو ةعشأ عيزوتب حمست ةقيرطب بعلملا عضو .1 ةبسنب بورغلاو قورشلا يترتف يف سمشلا نم ةئفاكتمو بعلملا يفصن نيب ةيواستم )نيسفانتملل( نيقيرفلل ةبسنلاب ايؤرلا ثيح بعلملا ضرا روحم نوكي نأ لضفي .2 بونجلا ىلا لامشلا نم اهجتم ي
+------------------------
+output:
+Based on the provided text and format, I will attempt to identify entities and relationships as per the steps outlined.
+
+**Step 1: Identify all entities**
+
+After analyzing the text, I have identified the following entities:
+
+("entity"{tuple_delimiter}املا{tuple_delimiter}GEO{tuple_delimiter}A country or region mentioned in the text)
 {record_delimiter}
-("entity"{tuple_delimiter}VISION HOLDINGS{tuple_delimiter}ORGANIZATION{tuple_delimiter}Vision Holdings is a firm that previously owned TechGlobal)
+("entity"{tuple_delimiter}نايصلاو{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
 {record_delimiter}
-("relationship"{tuple_delimiter}TECHGLOBAL{tuple_delimiter}VISION HOLDINGS{tuple_delimiter}Vision Holdings formerly owned TechGlobal from 2014 until present{tuple_delimiter}5)
+("entity"{tuple_delimiter}جرد نوكتو{tuple_delimiter}PERSON{tuple_delimiter}A person mentioned in the text, possibly a leader or official)
+{record_delimiter}
+("entity"{tuple_delimiter}هاجتا{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}علملا{tuple_delimiter}ORGANIZATION{tuple_delimiter}An organization or institution mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}بجي{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}هيلعو{tuple_delimiter}PERSON{tuple_delimiter}A person mentioned in the text, possibly a leader or official)
+{record_delimiter}
+("entity"{tuple_delimiter}عيزوتب{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}حمست{tuple_delimiter}ORGANIZATION{tuple_delimiter}An organization or institution mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}بجي{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text, same as previous instance)
+{record_delimiter}
+("entity"{tuple_delimiter}هيلعو{tuple_delimiter}PERSON{tuple_delimiter}A person mentioned in the text, possibly a leader or official, same as previous instance)
+{record_delimiter}
+
+**Step 2: Identify relationships among entities**
+
+After analyzing the text, I have identified the following relationships:
+
+("relationship"{tuple_delimiter}املا{tuple_delimiter}نايصلاو{tuple_delimiter}The country of Amla is mentioned in relation to the city of Nayiscalaw{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}جرد نوكتو{tuple_delimiter}هاجتا{tuple_delimiter}Jard Nukto and Haja Ta are mentioned together, possibly as leaders or officials{tuple_delimiter}2)
+{record_delimiter}
+("relationship"{tuple_delimiter}علملا{tuple_delimiter}بجي{tuple_delimiter}The organization of Almala is mentioned in relation to the city of Bgi{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}هيلعو{tuple_delimiter}عيزوتب{tuple_delimiter}Hilewo and Eizotob are mentioned together, possibly as leaders or officials{tuple_delimiter}2)
+{record_delimiter}
+("relationship"{tuple_delimiter}حمست{tuple_delimiter}بجي{tuple_delimiter}The organization of Hamsat is mentioned in relation to the city of Bgi{tuple_delimiter}3)
+{record_delimiter}
+
+**Step 3: Combine entities and relationships**
+
+Here is the combined output:
+
+("entity"{tuple_delimiter}املا{tuple_delimiter}GEO{tuple_delimiter}A country or region mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}نايصلاو{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}جرد نوكتو{tuple_delimiter}PERSON{tuple_delimiter}A person mentioned in the text, possibly a leader or official)
+{record_delimiter}
+("entity"{tuple_delimiter}هاجتا{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}علملا{tuple_delimiter}ORGANIZATION{tuple_delimiter}An organization or institution mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}بجي{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}هيلعو{tuple_delimiter}PERSON{tuple_delimiter}A person mentioned in the text, possibly a leader or official)
+{record_delimiter}
+("entity"{tuple_delimiter}عيزوتب{tuple_delimiter}GEO{tuple_delimiter}A city or town mentioned in the text)
+{record_delimiter}
+("entity"{tuple_delimiter}حمست{tuple_delimiter}ORGANIZATION{tuple_delimiter}An organization or institution mentioned in the text)
+{record_delimiter}
+("relationship"{tuple_delimiter}املا{tuple_delimiter}نايصلاو{tuple_delimiter}The country of Amla is mentioned in relation to the city of Nayiscalaw{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}جرد نوكتو{tuple_delimiter}هاجتا{tuple_delimiter}Jard Nukto and Haja Ta are mentioned together, possibly as leaders or officials{tuple_delimiter}2)
+{record_delimiter}
+("relationship"{tuple_delimiter}علملا{tuple_delimiter}بجي{tuple_delimiter}The organization of Almala is mentioned in relation to the city of Bgi{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}هيلعو{tuple_delimiter}عيزوتب{tuple_delimiter}Hilewo and Eizotob are mentioned together, possibly as leaders or officials{tuple_delimiter}2)
+{record_delimiter}
+("relationship"{tuple_delimiter}حمست{tuple_delimiter}بجي{tuple_delimiter}The organization of Hamsat is mentioned in relation to the city of Bgi{tuple_delimiter}3)
 {completion_delimiter}
 
-######################
-Example 3:
-Entity_types: ORGANIZATION,GEO,PERSON
-Text:
-Five Aurelians jailed for 8 years in Firuzabad and widely regarded as hostages are on their way home to Aurelia.
+Please note that I have translated some entity and relationship descriptions from Arabic to English, as per your request.
+#############################
 
-The swap orchestrated by Quintara was finalized when $8bn of Firuzi funds were transferred to financial institutions in Krohaara, the capital of Quintara.
 
-The exchange initiated in Firuzabad's capital, Tiruzia, led to the four men and one woman, who are also Firuzi nationals, boarding a chartered flight to Krohaara.
 
-They were welcomed by senior Aurelian officials and are now on their way to Aurelia's capital, Cashion.
-
-The Aurelians include 39-year-old businessman Samuel Namara, who has been held in Tiruzia's Alhamia Prison, as well as journalist Durke Bataglani, 59, and environmentalist Meggie Tazbah, 53, who also holds Bratinas nationality.
-######################
-Output:
-("entity"{tuple_delimiter}FIRUZABAD{tuple_delimiter}GEO{tuple_delimiter}Firuzabad held Aurelians as hostages)
-{record_delimiter}
-("entity"{tuple_delimiter}AURELIA{tuple_delimiter}GEO{tuple_delimiter}Country seeking to release hostages)
-{record_delimiter}
-("entity"{tuple_delimiter}QUINTARA{tuple_delimiter}GEO{tuple_delimiter}Country that negotiated a swap of money in exchange for hostages)
-{record_delimiter}
-{record_delimiter}
-("entity"{tuple_delimiter}TIRUZIA{tuple_delimiter}GEO{tuple_delimiter}Capital of Firuzabad where the Aurelians were being held)
-{record_delimiter}
-("entity"{tuple_delimiter}KROHAARA{tuple_delimiter}GEO{tuple_delimiter}Capital city in Quintara)
-{record_delimiter}
-("entity"{tuple_delimiter}CASHION{tuple_delimiter}GEO{tuple_delimiter}Capital city in Aurelia)
-{record_delimiter}
-("entity"{tuple_delimiter}SAMUEL NAMARA{tuple_delimiter}PERSON{tuple_delimiter}Aurelian who spent time in Tiruzia's Alhamia Prison)
-{record_delimiter}
-("entity"{tuple_delimiter}ALHAMIA PRISON{tuple_delimiter}GEO{tuple_delimiter}Prison in Tiruzia)
-{record_delimiter}
-("entity"{tuple_delimiter}DURKE BATAGLANI{tuple_delimiter}PERSON{tuple_delimiter}Aurelian journalist who was held hostage)
-{record_delimiter}
-("entity"{tuple_delimiter}MEGGIE TAZBAH{tuple_delimiter}PERSON{tuple_delimiter}Bratinas national and environmentalist who was held hostage)
-{record_delimiter}
-("relationship"{tuple_delimiter}FIRUZABAD{tuple_delimiter}AURELIA{tuple_delimiter}Firuzabad negotiated a hostage exchange with Aurelia{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}QUINTARA{tuple_delimiter}AURELIA{tuple_delimiter}Quintara brokered the hostage exchange between Firuzabad and Aurelia{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}QUINTARA{tuple_delimiter}FIRUZABAD{tuple_delimiter}Quintara brokered the hostage exchange between Firuzabad and Aurelia{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}SAMUEL NAMARA{tuple_delimiter}ALHAMIA PRISON{tuple_delimiter}Samuel Namara was a prisoner at Alhamia prison{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}SAMUEL NAMARA{tuple_delimiter}MEGGIE TAZBAH{tuple_delimiter}Samuel Namara and Meggie Tazbah were exchanged in the same hostage release{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}SAMUEL NAMARA{tuple_delimiter}DURKE BATAGLANI{tuple_delimiter}Samuel Namara and Durke Bataglani were exchanged in the same hostage release{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}MEGGIE TAZBAH{tuple_delimiter}DURKE BATAGLANI{tuple_delimiter}Meggie Tazbah and Durke Bataglani were exchanged in the same hostage release{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}SAMUEL NAMARA{tuple_delimiter}FIRUZABAD{tuple_delimiter}Samuel Namara was a hostage in Firuzabad{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}MEGGIE TAZBAH{tuple_delimiter}FIRUZABAD{tuple_delimiter}Meggie Tazbah was a hostage in Firuzabad{tuple_delimiter}2)
-{record_delimiter}
-("relationship"{tuple_delimiter}DURKE BATAGLANI{tuple_delimiter}FIRUZABAD{tuple_delimiter}Durke Bataglani was a hostage in Firuzabad{tuple_delimiter}2)
-{completion_delimiter}
-
-######################
 -Real Data-
 ######################
-Entity_types: {entity_types}
-Text: {input_text}
+text: {input_text}
 ######################
-Output:
+output:

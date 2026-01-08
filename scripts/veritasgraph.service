@@ -1,0 +1,23 @@
+[Unit]
+Description=VeritasGraph GraphRAG Demo Server
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/VeritasGraph/graphrag-ollama-config
+Environment="PATH=/home/ubuntu/VeritasGraph/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="NETLIFY_SITE_ID=your-site-id"
+Environment="NETLIFY_AUTH_TOKEN=your-netlify-token"
+ExecStart=/home/ubuntu/VeritasGraph/scripts/start-with-netlify.sh
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=append:/var/log/veritasgraph.log
+StandardError=append:/var/log/veritasgraph.log
+
+[Install]
+WantedBy=multi-user.target

@@ -117,15 +117,47 @@ conda activate rag
 cd /home/sijo/VeritasGraph/graphrag-ollama-config
 python app.py
 ```
- 
+
+Options:
+- `--share` - Create a public shareable link (Gradio tunneling)
+- `--port 8080` - Run on a custom port
+- `--host 0.0.0.0` - Bind to all interfaces for external access
+
 ### 3. Access the Interface
-Open your browser and visit: http://127.0.0.1:7860/
+Open your browser and visit: http://127.0.0.1:7861/
 
 ### 4. Using the UI
-1. Select the timestamp folder from the dropdown (e.g., `20251116-113611`)
+1. Select the output folder from the dropdown
 2. Choose query type: **Global Search** or **Local Search**
 3. Enter your question/prompt
 4. Click submit to get AI-generated responses
+5. Switch to the **Graph Explorer** tab to see the interactive knowledge graph!
+
+## 🔗 Interactive Graph Visualization
+
+VeritasGraph now includes an **interactive 2D knowledge graph** that visualizes the entities and relationships used in each query response!
+
+### Features
+- **PyVis-powered visualization** - Interactive, physics-based graph layout
+- **Query-aware subgraph extraction** - Highlights entities mentioned in your query and response
+- **Community-based coloring** - Nodes colored by their community membership
+- **Interactive exploration** - Drag, zoom, hover for entity details
+- **Full graph explorer** - Click "Explore Full Graph" to see the entire knowledge graph
+
+### How It Works
+1. After each query, the system extracts the relevant subgraph (nodes/edges) used for reasoning
+2. PyVis generates an interactive HTML visualization
+3. **Red nodes** = Query-related entities
+4. **Node size** = Importance (connection count)
+5. **Hover** over nodes to see their descriptions
+
+### Graph Stats for Current Dataset
+- 📊 **98 entities** (organizations, visa types, categories, etc.)
+- 🔗 **53 relationships** connecting entities
+- 🏘️ **2 communities** (clusters of related entities)
+
+### Toggle Visualization
+Use the checkbox "🔗 Show Graph Visualization" in the left panel to enable/disable automatic graph updates after each query.
 
 ## Recent Code Changes
 

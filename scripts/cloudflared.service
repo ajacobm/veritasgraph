@@ -1,0 +1,13 @@
+[Unit]
+Description=Cloudflare Tunnel for VeritasGraph
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/usr/local/bin/cloudflared tunnel run veritasgraph
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
