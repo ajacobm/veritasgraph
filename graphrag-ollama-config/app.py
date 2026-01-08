@@ -40,7 +40,9 @@ from graphrag.vector_stores.lancedb import LanceDBVectorStore
 # Import OpenAI-compatible API configuration from separate module
 from openai_config import get_api_type, get_llm_config, get_embedding_config
 
-load_dotenv('.env')
+# Load .env from the same directory as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(script_dir, '.env'))
 join = os.path.join
 
 PRESET_MAPPING = {
@@ -306,9 +308,9 @@ async def chat_graphrag(
     ):
     # Handle both new format ("output" -> output/artifacts) and old format (timestamp -> output/timestamp/artifacts)
     if selected_folder == "output":
-        input_dir = join("output", "artifacts")
+        input_dir = join(script_dir, "output", "artifacts")
     else:
-        input_dir = join("output", selected_folder, "artifacts")
+        input_dir = join(script_dir, "output", selected_folder, "artifacts")
 
     community_level = PRESET_MAPPING[preset]["community_level"]
     response_type = PRESET_MAPPING[preset]["response_type"]
@@ -359,13 +361,13 @@ async def chat_graphrag(
     
     return "", history, graph_html
 
-def list_output_folders(root_dir):
+def list_output_folders():
     """List available output folders for GraphRAG queries.
     
     Supports both old format (timestamped folders like 20241201-123456)
     and new format (direct artifacts/ folder in output/).
     """
-    output_dir = join(root_dir, "output")
+    output_dir = join(script_dir, "output")
     if not os.path.exists(output_dir):
         return []
     
@@ -415,7 +417,7 @@ def create_gradio_interface():
         
         with gr.Row(elem_id="main-container"):
             with gr.Column(scale=1, elem_id="left-column"):
-                output_folders = list_output_folders(".")
+                output_folders = list_output_folders()
                 output_folder = output_folders[0] if output_folders else "No output found"
                 selected_folder = gr.Dropdown(
                     label="Select Output Folder",
